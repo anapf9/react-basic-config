@@ -20,7 +20,25 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
-      }
+      },
+      {
+        test: /\.css$/, //todos os arquivos .js vão para essa regra
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "style-loader" // pega o css que foi interpretado pelo css loader e injeta no html
+          },
+          {
+            loader: "css-loader" // le o arquivo css, verifica as importações e manda para o webpack analisar
+          },
+        ]
+      },
+      {
+        test: /.*\.(gif|png|jpe?g)$/i, 
+        use: {
+          loader: "file-loader"
+        }
+      },
     ]
   }
 };

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import Header from './components/Header'
+import './App.css'
+import background from './assets/united-nations-covid-19-response-pRi0DvmiFf8-unsplash.jpg'
 
 function App() {
   const [projects, setProjects] = useState([
@@ -23,6 +25,8 @@ function App() {
     <>
     <Header title="homepage"> 
     </Header>
+
+    <img width={300} src={background} />
     <ul>
       {projects.map(project => <li key={project}>{project}</li> )}
     </ul>
