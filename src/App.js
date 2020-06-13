@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api'
 
 import Header from './components/Header'
 import './App.css'
-import background from './assets/united-nations-covid-19-response-pRi0DvmiFf8-unsplash.jpg'
 
 function App() {
-  const [projects, setProjects] = useState([
-    'dev web',
-    'frontend'
-  ]) 
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    api.get('repositories').then(response => {
+      console.log(response.data)
+      setProjects(response.data)
+    })
+  }, []) // array de dependencia
   // use state retorna um array com 2 posições
   //1.  Varivael com o valor inicial
   //2. Função para atualizar o valor
@@ -26,9 +30,8 @@ function App() {
     <Header title="homepage"> 
     </Header>
 
-    <img width={300} src={background} />
     <ul>
-      {projects.map(project => <li key={project}>{project}</li> )}
+      {projects.map(project => <li key={project.id}>{project.title}</li> )}
     </ul>
 
     <button type="button" onClick={handleAddProject}>Add</button>
