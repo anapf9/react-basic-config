@@ -12,18 +12,19 @@ function App() {
       console.log(response.data)
       setProjects(response.data)
     })
-  }, []) // array de dependencia
-  // use state retorna um array com 2 posições
-  //1.  Varivael com o valor inicial
-  //2. Função para atualizar o valor
-  function handleAddProject() {
-    // projects.push(`Novo projeto ${Date.now()}`) // alterando o array original
+  }, []) 
+  async function handleAddProject() {
+    const response = await api.post('repositories', {
+      title: 'Meu Git 2',
+      url: 'http://github.com/anapf9',
+      techs: [ 
+      'Vue',
+      'Javascript'
+      ]
+    })
 
-    // dessa forma é como se criasse um novo Array a partir do original e acrescenta o valor desejado nesse novo array sem mudar o original
-    // então setamos para usar o novo array
-    setProjects([...projects, `Novo projeto ${Date.now()}`]) // aplicando o conceito de imutabilidade
-    
-    // console.log(projects)
+    const project = response.data 
+    setProjects([...projects, project])
   }
   return (
     <>
